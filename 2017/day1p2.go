@@ -8,7 +8,7 @@ import (
 )
 
 func abort(msg string, args ...any) {
-	fmt.Fprintf(os.Stderr, msg, args...)
+	fmt.Fprintf(os.Stderr, msg+"\n", args...)
 	os.Exit(2)
 }
 
@@ -21,14 +21,14 @@ func main() {
 
 	input, err := io.ReadAll(os.Stdin)
 	if err != nil {
-		abort("Failed to read stdin: %w\n", err)
+		abort("ERROR reading stdin: %s", err)
 	}
 
 	input = bytes.TrimSpace(input)
 
 	for i, ch := range input {
 		if !isdigit(ch) {
-			abort("input at %d is not a char: %q\n", i, ch)
+			abort("ERROR not digit at position %d: %c", i, ch)
 		}
 		ri := (i + (len(input) / 2)) % len(input)
 		if ch == input[ri] {

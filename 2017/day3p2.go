@@ -9,18 +9,18 @@ import (
 const dim = 65
 
 func abort(msg string, args ...any) {
-	fmt.Fprintf(os.Stderr, msg, args...)
+	fmt.Fprintf(os.Stderr, msg+"\n", args...)
 	os.Exit(2)
 }
 
 func main() {
 	if len(os.Args) != 2 {
-		abort("Usage: %s <val>\n", os.Args[0])
+		abort("Usage: %s <val>", os.Args[0])
 	}
 
 	val, err := strconv.Atoi(os.Args[1])
 	if err != nil {
-		abort("Invalid value: %q", os.Args[1])
+		abort("ERROR invalid value: %q", os.Args[1])
 	}
 
 	// calculate and store grid cells sequentially

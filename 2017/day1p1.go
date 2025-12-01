@@ -7,7 +7,7 @@ import (
 )
 
 func abort(msg string, args ...any) {
-	fmt.Fprintf(os.Stderr, msg, args...)
+	fmt.Fprintf(os.Stderr, msg+"\n", args...)
 	os.Exit(2)
 }
 
@@ -18,7 +18,7 @@ func isdigit(ch byte) bool {
 func main() {
 	input, err := io.ReadAll(os.Stdin)
 	if err != nil {
-		abort("Failed to read stdin: %w", err)
+		abort("ERROR reading stdin: %s", err)
 	}
 
 	total := int(0)
@@ -34,7 +34,7 @@ func main() {
 	}
 	for i, ch := range input {
 		if !isdigit(ch) {
-			abort("ERROR not digit at position %d: %c\n", i, ch)
+			abort("ERROR not digit at position %d: %c", i, ch)
 		}
 		if ch == last {
 			total += int(ch - byte('0'))

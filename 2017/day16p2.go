@@ -112,6 +112,7 @@ func main() {
 			fmt.Printf("seen round %d == %d\n", i, r)
 			fmt.Printf("After 1,000,000,000 rounds, state should match round %d\n",
 				(1_000_000_000 - i) % (r - i) + i)
+			// Simple case: i=0 (round 0 seen first), final pattern matches round (1 million % r)
 			break
 		}
 		seen[sp] = r
